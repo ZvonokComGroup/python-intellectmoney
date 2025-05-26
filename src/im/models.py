@@ -1,7 +1,7 @@
 import datetime
 import decimal
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, TypeAlias
 from uuid import UUID
 
 from pydantic import BaseModel, EmailStr
@@ -32,8 +32,7 @@ class OperationState(BaseModel):
     Desc: str
 
 
-class UserToken(str):
-    pass
+UserToken: TypeAlias = str
 
 
 class UserTokenData(BaseModel):

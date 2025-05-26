@@ -1,6 +1,6 @@
 import datetime
 import decimal
-from enum import Enum
+from enum import Enum, IntEnum, StrEnum
 from typing import List, Optional, TypeAlias
 from uuid import UUID
 
@@ -19,7 +19,7 @@ class BearerData(BaseModel):
     secret: str
 
 
-class RequestState(int, Enum):
+class RequestState(IntEnum):
 
     Success = 0
     WithWarn = 1
@@ -41,7 +41,7 @@ class UserTokenData(BaseModel):
     UserToken: UserToken
 
 
-class InvoiceState(str, Enum):
+class InvoiceState(StrEnum):
 
     Created = 'Created'
     PartPaid = 'PartPaid'
@@ -51,7 +51,7 @@ class InvoiceState(str, Enum):
     Held = 'Held'
 
 
-class IsHoldingSearch(int, Enum):
+class IsHoldingSearch(IntEnum):
 
     WithoutOrganizations = 0
     WithOrganizations = 1
@@ -68,19 +68,19 @@ class InvoiceSortOrder(str, Enum):
 class GetInvoicesHistory(BaseModel):
 
     UserToken: UserToken
-    EshopId: Optional[int]
-    OrganizationId: Optional[int]
-    State: Optional[InvoiceState]
-    InvoiceId: Optional[int]
-    IncludePaymentTransactions: Optional[bool]
-    IsHoldingSearch: Optional[IsHoldingSearch]
-    OwnerEmail: Optional[EmailStr]
-    SortOrder: Optional[InvoiceSortOrder]
-    DateFrom: Optional[datetime.date]
-    DateTo: Optional[datetime.date]
-    ChangeDateFrom: Optional[datetime.date]
-    ChangeDateTo: Optional[datetime.date]
-    Skip: Optional[int]
+    EshopId: Optional[int] = None
+    OrganizationId: Optional[int] = None
+    State: Optional[InvoiceState] = None
+    InvoiceId: Optional[int] = None
+    IncludePaymentTransactions: Optional[bool] = None
+    IsHoldingSearch: Optional[IsHoldingSearch] = None
+    OwnerEmail: Optional[EmailStr] = None
+    SortOrder: Optional[InvoiceSortOrder] = None
+    DateFrom: Optional[datetime.date] = None
+    DateTo: Optional[datetime.date] = None
+    ChangeDateFrom: Optional[datetime.date] = None
+    ChangeDateTo: Optional[datetime.date] = None
+    Skip: Optional[int] = None
     Take: int
 
 
@@ -100,9 +100,9 @@ class OperationState(BaseModel):
 class BaseResponse(BaseModel):
 
     OperationState: OperationState
-    OperationId: Optional[UUID]
-    EshopId: Optional[int]
-    Result: Optional[dict]
+    OperationId: Optional[UUID] = None
+    EshopId: Optional[int] = None
+    Result: Optional[dict] = None
 
 
 class Currency(str, Enum):
@@ -157,7 +157,7 @@ class InvoiceData(BaseModel):
     Comment: str
     EShopId: int
     PurchaseOrderId: str
-    HistoryList: Optional[List[HistoryData]]
+    HistoryList: Optional[List[HistoryData]] = None
 
 
 class InvoicesHistoryList(BaseModel):
@@ -174,11 +174,11 @@ class InvoicesResponse(BaseResponse):
 class GetPaymentsHistory(BaseModel):
 
     UserToken: UserToken
-    EshopId: Optional[int]
-    PaymentTransactionId: Optional[int]
-    DateFrom: Optional[datetime.date]
-    DateTo: Optional[datetime.date]
-    Skip: Optional[int]
+    EshopId: Optional[int] = None
+    PaymentTransactionId: Optional[int] = None
+    DateFrom: Optional[datetime.date] = None
+    DateTo: Optional[datetime.date] = None
+    Skip: Optional[int] = None
     Take: int
 
 
